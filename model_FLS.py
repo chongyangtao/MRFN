@@ -61,12 +61,6 @@ class model(object):
 
                 context_char_embeddings = tf.nn.embedding_lookup(char_embeddings, self.char_context) # [batch, max_turn, max_word_len, max_char_len, char_dim]
                 
-                # context_char_embeddings = tf.reshape(context_char_embeddings, [-1, max_char_len, char_dim])
-                # context_char_embeddings = conv(context_char_embeddings, conv_dim, kernel_size=kernels, bias=True, activation=tf.nn.relu, name="char_conv", isNormalize=False, reuse=True)
-                # context_char_embeddings = tf.reduce_max(context_char_embeddings, axis = 1)
-                # self.parall_context_char_embeddings = tf.reshape(context_char_embeddings, [-1, max_word_len, conv_dim*len(kernels)]) 
-                # self.parall_context_char_embeddings = tf.layers.dropout(self.parall_context_char_embeddings, rate=1-self.dropout_keep_prob)
-
                 cont_char_embeddings = []
                 for k, utt_char_emb in enumerate(tf.unstack(context_char_embeddings, axis=1)):
                     utt_char_embeddings = tf.reshape(utt_char_emb, [-1, max_char_len, char_dim])
