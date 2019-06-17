@@ -19,7 +19,7 @@ sh download.sh
 python data_utils_record.py
 ```
 
-All hyper parameters are stored in config.py. To train and valid, run
+All hyper parameters are stored in config.py. To train, run
 
 ```bash
 python main.py --log_root=logs_ubuntu --batch_size=100
