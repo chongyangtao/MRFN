@@ -155,14 +155,13 @@ if __name__=="__main__":
                     model.dropout_keep_prob: FLAGS.dropout_keep_prob
                 }
 
-                _, step, summaries, loss, accuracy, loss_list= sess.run(
-                    [train_op, global_step, train_summary_op, model.loss, model.accuracy, model.loss_list], feed_dict)
+                _, step, summaries, loss, accuracy= sess.run(
+                    [train_op, global_step, train_summary_op, model.loss, model.accuracy], feed_dict)
 
 
                 if step % FLAGS.print_every == 0:
                     time_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                    print("Step: %d \t| loss: %.3f \t| acc: %.3f \t| %s \t| lr: %.5f \t| %s" %
-                          (step, loss, accuracy, '\t|'.join(['%.3f'%item for item in loss_list]), current_lr, time_str))
+                    print("Step: %d \t| loss: %.3f \t| acc: %.3f \t| lr: %.5f \t| %s" % (step, loss, accuracy, current_lr, time_str))
                     train_summary_writer.add_summary(summaries, step)
 
 
