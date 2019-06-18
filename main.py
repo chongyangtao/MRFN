@@ -8,32 +8,23 @@ from datetime import datetime
 from nvidia_helper import get_available_gpu
 from metrics import recall_2at1, recall_at_k, precision_at_k, MRR, MAP
 from data_utils_record import get_record_parser, get_batch_dataset
-
 from model_FLS import model 
 from config import config
 
 data_path='ubuntu'
-
 if __name__=="__main__":
-
-    # python main.py --log_root=./logs_fls/ --batch_size=100
-
     FLAGS = config(data_path)
     print("\nParameters:")
     for attr, value in sorted(FLAGS.__flags.items()):
         print("{}={}".format(attr.upper(), value))
     print("")
 
-
     if FLAGS.auto_gpu:
-        # Selecting which GPU to use
         index_of_gpu = get_available_gpu()
         FLAGS.gpu = 'gpu:' + str(index_of_gpu)
         os.environ["CUDA_VISIBLE_DEVICES"] = FLAGS.gpu.split(':')[1]
-
     else:
     	os.environ["CUDA_VISIBLE_DEVICES"] = '0'
-
 
     # Output directory for models and summaries
     out_dir = os.path.abspath(os.path.join(os.path.curdir, FLAGS.log_root))
@@ -49,7 +40,6 @@ if __name__=="__main__":
         session_conf = tf.ConfigProto(
             allow_soft_placement=FLAGS.allow_soft_placement,
             log_device_placement=FLAGS.log_device_placement)
-        # session_conf.gpu_options.allow_growth = True
         sess = tf.Session(config=session_conf)
 
         if FLAGS.init_dict:
@@ -98,7 +88,6 @@ if __name__=="__main__":
 
             train_handle = sess.run(train_iterator.string_handle())
 
-
             model = model(iterator, FLAGS, FLAGS.embed_dim, FLAGS.vocab_size, FLAGS.char_embed_dim, FLAGS.char_vocab_size, FLAGS.rnn_dim, FLAGS.max_turn, 
                             FLAGS.max_utterance_len, FLAGS.max_word_len, pretrained_word_embeddings, pretrained_char_embeddings)
 
@@ -121,7 +110,6 @@ if __name__=="__main__":
 
             # for item in tf.trainable_variables():
             #     print(item.name)
-
 
             # Summaries for loss and accuracy
             loss_summary = tf.summary.scalar("train/loss", model.loss)

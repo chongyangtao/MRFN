@@ -22,11 +22,11 @@ def config(data_path='ubuntu'):
 	tf.flags.DEFINE_string('init_char_embeddings_path', './%s/char_emb_matrix.pkl'%(data_path), 'Path expression to initial char embedding file. ')
 	tf.flags.DEFINE_string('char_dict_path', './%s/char_dict.pkl'%(data_path), 'Path expression to char dict. ')
 
-	tf.flags.DEFINE_integer("char_vocab_size", 100, "Size of char vocabulary")
+	tf.flags.DEFINE_integer("char_vocab_size", 173, "Size of char vocabulary")
 	tf.flags.DEFINE_integer("char_embed_dim", 64, "Dimensionality of char embedding")
 	tf.flags.DEFINE_integer("char_hid", 100, "Dimensionality of char embedding") # 100
 
-	tf.flags.DEFINE_integer("vocab_size", 5000000, "Size of vocabulary")
+	tf.flags.DEFINE_integer("vocab_size", 439759, "Size of vocabulary")
 	tf.flags.DEFINE_integer("max_turn", 10, "Max length of turn")
 	tf.flags.DEFINE_integer("max_utterance_len", 50, "Max length of word") 
 	tf.flags.DEFINE_integer("max_word_len", 16, "Max length of characters") 
