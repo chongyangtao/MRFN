@@ -4,10 +4,10 @@ This is an implementation of [Multi-Representation Fusion Network for Multi-turn
 
 
 ## Requirements
+* Ubuntu 16.04
+* Tensorflow 1.4.0
 * Python 2.7
 * NumPy
-* Tensorflow 1.4.0
-
 
 ## Usage
 To download and preprocess the data, run
