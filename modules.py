@@ -105,7 +105,7 @@ def multihead_attention(queries, keys, num_units=None, num_heads=8, dropout_rate
     with tf.variable_scope(scope, reuse=reuse):
         # Set the fall back option for num_units
         if num_units is None:
-            num_units = queries.get_shape().as_list[-1]
+            num_units = queries.get_shape().as_list()[-1]
 
         # Linear projections
         Q = tf.layers.dense(queries, num_units, activation=tf.nn.relu, name="dense_q")  # (N, T_q, C)
